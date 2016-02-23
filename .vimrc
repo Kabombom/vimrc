@@ -42,9 +42,6 @@ Plugin 'altercation/vim-colors-solarized'
 "ImprovedCPP
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
-"Fugitive
-Plugin 'tpope/vim-fugitive'
-
 "Tabularize
 Plugin 'godlygeek/tabular'
 
@@ -68,7 +65,7 @@ Plugin 'mattn/gist-vim'
 Plugin 'mattn/emmet-vim'
 
 call vundle#end()
-filetype plugin indent on
+filetype off
 "=End of Vundle
 
 "Mapping for vim-expand-region
@@ -132,13 +129,12 @@ let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 "For UltiSnips
-let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips/'
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:SuperTabCrMapping = 0
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
-"Line Identation
+let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips/'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 
