@@ -1,72 +1,58 @@
-"Vundle Stuff
 set nocompatible
-filetype indent plugin on
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 set encoding=utf-8
 
+"Vundle Stuff {{
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-
-"Linter
-Plugin 'scrooloose/syntastic'
-
-"Airline
-Plugin 'bling/vim-airline'
-
-"Polyglot
-Plugin 'sheerun/vim-polyglot'
-
-"Expand
-Plugin 'terryma/vim-expand-region'
-
-"UltiSnips
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-
-"EndComplete
-Plugin 'tpope/vim-endwise'
-
-"IndentLines
-Plugin 'Yggdroot/indentLine'
-
-"Nerd Tree
-Plugin 'scrooloose/nerdtree'
-
-"Commenter
-Plugin 'scrooloose/nerdcommenter'
-
-"Themes
-Plugin 'chriskempson/tomorrow-theme'
-Plugin 'altercation/vim-colors-solarized'
-
-"ImprovedCPP
-Plugin 'octol/vim-cpp-enhanced-highlight'
-
-"Tabularize
-Plugin 'godlygeek/tabular'
-
-"Super-Tab
-Plugin 'ervandew/supertab'
-
-"CtrlP
-Plugin 'kien/ctrlp.vim'
-
-"Surround.vim
-Plugin 'tpope/vim-surround'
-
-"Auto-Pair
-Plugin 'jiangmiao/auto-pairs'
-
-"Gist
-Plugin 'mattn/webapi-vim'
-Plugin 'mattn/gist-vim'
-
-"Emmet
-Plugin 'mattn/emmet-vim'
-
+  Plugin 'gmarik/Vundle.vim'
+  Plugin 'bling/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'sheerun/vim-polyglot'
+  Plugin 'terryma/vim-expand-region'
+  Plugin 'SirVer/ultisnips'
+  Plugin 'honza/vim-snippets'
+  Plugin 'tpope/vim-endwise'
+  Plugin 'Yggdroot/indentLine'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'scrooloose/nerdcommenter'
+  Plugin 'chriskempson/tomorrow-theme'
+  Plugin 'w0ng/vim-hybrid'
+  Plugin 'whatyouhide/vim-gotham'
+  Plugin 'jpo/vim-railscasts-theme'
+  Plugin 'octol/vim-cpp-enhanced-highlight'
+  Plugin 'godlygeek/tabular'
+  Plugin 'ervandew/supertab'
+  Plugin 'ctrlpvim/ctrlp.vim'
+  Plugin 'tpope/vim-surround'
+  Plugin 'jiangmiao/auto-pairs'
+  Plugin 'mattn/webapi-vim'
+  Plugin 'mattn/gist-vim'
+  Plugin 'mattn/emmet-vim'
 call vundle#end()
-filetype off
-"=End of Vundle
+
+filetype plugin indent on
+"}}
+
+"Leader key related mappings {{
+let mapleader="\<Space>"
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+nmap <Leader><Leader> V
+"}}
+
+"Shaking the noob out{{
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+"}}
 
 "Mapping for vim-expand-region
 vmap v <Plug>(expand_region_expand)
@@ -85,34 +71,32 @@ else
                 \ }
 endif
 
-"General
+"General {{
 set autoread
 set autoindent
 set incsearch      "Move cursor to search result as you type
 set autoindent     "Autoindentation
 set smartindent
-set shiftwidth=4
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set ignorecase     "Search is not case sensitive
 set scrolloff=20   "Always keep a space of 20 lines from bottom
 set wildmenu       "Wildmenu on
 set wildmode=longest,full
 set backspace=eol,start,indent 
-let mapleader = ","
-let g:mapleader = ","
-let python_highlight_all = 1
 
 if exists("&wildignorecase")
   set wildignorecase
 endif
+"}}
 
-"Cosmetic
+"Cosmetic {{
 syntax enable
-colorscheme Tomorrow-Night-Bright
-set guifont=Inconsolata:h17
+colorscheme railscasts
 set number         "Line Numbers
-set ts=4           "Smaller tab size
-set tabstop=4
+set ts=2           "Smaller tab size
+set tabstop=2
 set cmdheight=2    "Height of the cmd line
 set lbr            "Linebreak on 500 chars
 set tw=500
@@ -121,50 +105,37 @@ set hlsearch       "Highlight search result
 set showcmd        "Command in bottom bar
 set linespace=0    "No spacing between lines
 set showmatch      "Show matching parenthesis and brackets
-set term=screen-256color
 set t_Co=256
+"}}
 
-"Change cursor shape in insert mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
-"For UltiSnips
-
+"For UltiSnips {{
 let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips/'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+"}}
 
+"IndentLine {{
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
+"}}
 
-"Airline
+"Airline {{
 set laststatus=2
-set linespace=0
 let g:airline_theme="tomorrow"
-let g:airline_detect_modified = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#syntastic#enabled = 1
-set encoding=utf-8
-if !exists('g:airline_symbols')
-      let g:airline_symbols = {}
-endif
+let g:airline_powerline_fonts=1
+"}}
 
-"poweerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-"syntastic
-let g:syntastic_enable_highlighting = 0
-let g:syntastic_auto_jump = 1
-let g:syntastic_check_on_open = 0
-
-"Emmet
+"Emmet {{
+let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+"}}
+
+"SuperTab
+let g:SuperTabDefaultCompletionType = "context"
+
+let g:airline_left_sep = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_sep = ''
