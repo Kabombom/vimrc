@@ -1,64 +1,83 @@
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-set encoding=utf-8
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-"Vundle Stuff {{
-call vundle#begin()
-  "Plugin manager
-  Plugin 'gmarik/Vundle.vim'
+" Required:
+set runtimepath+=/Users/Machado/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+
+" Required:
+if dein#load_state('/Users/Machado/.config/nvim/dein')
+  call dein#begin('/Users/Machado/.config/nvim/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/Machado/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
 
   "Pretty statusline with themes
-  Plugin 'bling/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
+  call dein#add('bling/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
 
   "Add support for tons of languages
-  Plugin 'sheerun/vim-polyglot'
-  Plugin 'octol/vim-cpp-enhanced-highlight'
-
-  "snipmate dependencies and snipmate
-  Plugin 'MarcWeber/vim-addon-mw-utils'
-  Plugin 'tomtom/tlib_vim'
-  Plugin 'garbas/vim-snipmate'
-
-  "since snipmate doesnt come with snippets out of the box i use vim-snippets that comes with a bunch of snippets out of the box
-  Plugin 'honza/vim-snippets'
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('octol/vim-cpp-enhanced-highlight')
 
   "Add indentation lines
-  Plugin 'Yggdroot/indentLine'
+  call dein#add('Yggdroot/indentLine')
 
   "Project tree
-  Plugin 'scrooloose/nerdtree'
+  call dein#add('scrooloose/nerdtree')
 
   "Easily comment select area. This relies on visual mode, i should feel bad for using visual mode and this plugin.
-  Plugin 'scrooloose/nerdcommenter'
+  call dein#add('scrooloose/nerdcommenter')
 
   "Personal Theme I use
-  Plugin 'jpo/vim-railscasts-theme'
+  call dein#add('jpo/vim-railscasts-theme')
 
   "Fuzzy file finder. Probably will uninstall this when using neovim.
-  Plugin 'ctrlpvim/ctrlp.vim'
+  call dein#add('ctrlpvim/ctrlp.vim')
 
   "Easy change of surroundings. I should stop being lazy and write a script in vim instead of using a plugin for this.
-  Plugin 'tpope/vim-surround'
+  call dein#add('tpope/vim-surround')
 
   "Insert brackets, parens, quotes in pair
-  Plugin 'jiangmiao/auto-pairs'
+  call dein#add('jiangmiao/auto-pairs')
 
   "Show git diff when writing file
-  Plugin 'airblade/vim-gitgutter'
+  call dein#add('airblade/vim-gitgutter')
 
   " Allow tab for insert completion 
-  Plugin 'ervandew/supertab'
+  call dein#add('ervandew/supertab')
 
-  " Probably will delete this, still not sure
-  "Plugin 'tpope/vim-endwise'
-  "Plugin 'godlygeek/tabular'
-  "Plugin 'terryma/vim-expand-region'
-call vundle#end()
+  "Neovim linting
+  call dein#add('w0rp/ale')
 
+  "Neovim completion
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
 filetype plugin indent on
-"}}
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
 
 "Leader key related mappings {{
 "
@@ -149,7 +168,7 @@ if has("gui_running")
   set guioptions=T
   set guioptions=m
 endif
-set guifont=Inconsolata\ for\ Powerline:h15
+set guifont=*
 highlight Cursor guifg=white guibg=white
 highlight iCursor guifg=white guibg=white
 set guicursor=n-v-c:block-Cursor
@@ -166,22 +185,14 @@ vmap <C-v> <Plug>(expand_region_shrink)
 "ctrlp {{
 let g:ctrlp_use_caching = 0
 if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
     let g:ctrlp_prompt_mappings = {
                 \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
                 \ }
 endif
-"}}
-
-"For UltiSnips {{
-let g:UltiSnipsSnippetsDir = '~/.vim/bundle/vim-snippets/UltiSnips/'
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 "}}
 
 "IndentLine {{
@@ -201,3 +212,19 @@ let g:airline_powerline_fonts=1
 
 "SuperTab
 let g:SuperTabDefaultCompletionType = "context"
+
+" NeoSnipeet key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+call deoplete#enable()

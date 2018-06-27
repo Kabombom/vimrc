@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/Machado/.vim'
-let g:netrw_dirhist_2='/Users/Machado/ppp'
-let g:netrw_dirhist_3='/Users/Machado/ppp/Exames'
-let g:netrw_dirhist_4='/Users/Machado/ppp'
-let g:netrw_dirhist_5='/Users/Machado/Java'
